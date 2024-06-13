@@ -1,13 +1,14 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Configurações iniciais da CNN
 def initialize_cnn():
     classifier = Sequential()
+    classifier.add(Input(shape=(10, 12, 1)))  # Adiciona explicitamente uma camada de entrada
 
     # Primeira camada
-    classifier.add(Conv2D(32, (3, 3), input_shape=(10, 12, 1), activation='relu'))
+    classifier.add(Conv2D(32, (3, 3), activation='relu'))
     classifier.add(MaxPooling2D(pool_size=(2, 2)))
 
     # Segunda camada
@@ -32,13 +33,29 @@ def images_train_validation():
     validation_datagen = ImageDataGenerator(rescale=1./255)
 
     # Pré-processamento das imagens de treino e validação
-    training_set = train_datagen.flow_from_directory('dataset_train',
+    training_set = train_datagen.flow_from_directory('data/dataset_train',
                                                      target_size=(10, 12), 
                                                      batch_size=32,
                                                      class_mode='categorical')
 
-    validation_set = validation_datagen.flow_from_directory('dataset_validation',
+    validation_set = validation_datagen.flow_from_directory('data/dataset_validation',
                                                             target_size=(10, 12), 
                                                             batch_size=32,
                                                             class_mode='categorical')
     return training_set, validation_set
+
+# classifier = initialize_cnn()
+# training_set, validation_set = images_train_validation()
+
+# # Executando o treinamento
+# classifier.fit(training_set,
+#                steps_per_epoch=100,
+#                epochs=5,
+#                validation_data=validation_set,
+#                validation_steps=100)
+
+import os
+
+def organize_data(path: str):
+    images = []
+    
