@@ -1,6 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
 
 # Configurações iniciais da CNN
 def initialize_cnn():
@@ -54,8 +55,5 @@ def images_train_validation():
 #                validation_data=validation_set,
 #                validation_steps=100)
 
-import os
 
-def organize_data(path: str):
-    images = []
-    
+
