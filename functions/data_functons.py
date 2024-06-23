@@ -18,3 +18,9 @@ def _create_labels_array_numpy(labels_path, destination_path):
     labels = [letters.index(char) for char in open_file(labels_path)]
     np.save(os.path.join(destination_path, 'labels.npy'), np.array(labels))
 
+if __name__ == '__main__':
+    dataset_path = 'data\dataset'
+    destination_path = 'data'
+    _create_images_array_numpy(dataset_path, destination_path)
+    _create_labels_array_numpy(dataset_path, destination_path)
+
