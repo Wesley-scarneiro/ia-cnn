@@ -71,9 +71,9 @@ def train_cnn(images_numpy, labels_numpy, epochs, model, save_path):
 
 def main():
     save_path = 'cnn_models_binary'
-    model = create_model_cnn()
-    epochs = 50
-    train_cnn('data/images.npy', 'data/labels.npy', epochs, model, save_path)
+    for epochs in range(10, 101, 10):
+        model = create_model_cnn()
+        train_cnn('data\images.npy', 'data\labels.npy', epochs, model, save_path)
 
 if __name__ == '__main__':
     main()
