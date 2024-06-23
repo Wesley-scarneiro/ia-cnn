@@ -32,9 +32,9 @@ def load_data_cnn(images_numpy, labels_numpy) -> DataCnn:
 # Cria um modelo CNN para treinamento
 def create_model_cnn():
     model = Sequential()
-    model.add(Conv2D(8, (3, 3), activation='relu', input_shape=(10, 12, 1)))
+    model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(10, 12, 1)))
     model.add(MaxPooling2D((2, 2)))
-    model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D((2, 2)))
     model.add(Flatten())
     model.add(Dense(64, activation='relu'))
