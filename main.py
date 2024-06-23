@@ -21,8 +21,8 @@ def convert_labels(train_labels, val_labels, test_labels) -> DataCnn:
 
 # Carregamento, divisão e pré-processamento dos dados que serão utilizados no modelo
 def load_data_cnn(images_numpy, labels_numpy) -> DataCnn:
-    image_paths = np.load('data\images.npy')
-    labels = np.load('data\labels.npy')
+    image_paths = np.load(images_numpy)
+    labels = np.load(labels_numpy)
     train_images, test_images, train_labels, test_labels = train_test_split(image_paths, labels, test_size=0.2, random_state=42)
     train_images, val_images, train_labels, val_labels = train_test_split(train_images, train_labels, test_size=0.2, random_state=42)
     train_images, val_images, test_images = process_images(train_images, val_images, test_images)
@@ -73,10 +73,9 @@ def train_cnn(images_numpy, labels_numpy, epochs, model, save_path):
     plot_confusion_matrix(model, data.test_images, data.test_labels, test_accuracy, path_dir)
 
 def main():
-    save_path = 'cnn_models'
-    for epoch in range(10, 101, 10):
-        model = create_model_cnn()
-        train_cnn('data\images.npy', 'data\labels.npy', epoch, model, save_path)
-
+    save_path = 'cnn_models_test'
+    model = create_model_cnn()
+    train_cnn('data\images.npy', 'data\labels.npy', 10, model, save_path)
+        
 if __name__ == '__main__':
     main()
